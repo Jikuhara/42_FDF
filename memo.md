@@ -143,3 +143,70 @@ kjikuhar@c2r9s2 ~/42_FDF/test % ./a.out
 ```
 
 良さげですねぇ。
+
+2025/06/28の進捗
+
+```c
+#include "../minilibx-linux/mlx.h"
+#include <stdio.h>
+
+int	main(void)
+{
+	void *mlx;
+	void *win;
+
+	mlx = mlx_init();
+	if (mlx == NULL)
+	{
+		printf("Initialization failed\n");
+		return (1);
+	}
+	win = mlx_new_window(mlx, 200, 200, "Hello world!");
+	int count = 200;
+	for (int i = 0; i < count; i++)
+	{
+		for (int j = 0; j < count; j++)
+		{
+			mlx_pixel_put(mlx, win, i, j, 0x00FFFFFF - i);
+		}
+	}
+	mlx_string_put(mlx, win, 0, 0, 0x00FFFFFF, "42Tokyo");
+	mlx_loop(mlx);
+	return (0);
+}
+```
+
+色変化のある、正方形の出力が出来た。
+また、文字の出力も出来た。
+
+PDFの読み込みを行った。
+やるべきことは主に3つ。
+
+## INPUTの実装
+1. 入力のvalidationをおこなう。
+2. 入力されたmap情報を2次元配列に格納する。
+   1. get_next_lineを使って、1行ずつ読み込む。
+   2. ft_splitを使用して、読み込んだ行をスペースで分割する。
+
+どれぐらいのサイズが来るかわからないので、必ずmallocを使用する必要がある。
+
+### mallocのサイズどうしようか問題。
+get_next_lineを1回呼び出して、サイズを確認する必要あり？→これで横の大きさは確認できそう。
+縦のline数がわからんねぇ。どうしたらいいんやろ。fileを読み込んだ瞬間わかったりするんかなぁ。
+readのバイト数を数えたら行ける？ワンちゃんいけそうではある。
+
+## OUTPUTの実装
+やることは3つ。
+1. windowの準備をする。
+   1. mlx_init()で、minilibxの初期化を行う。
+   2. mlx_new_window()で、ウィンドウを作成する。
+   3. mlx_pixel_put()で、各点を描画する。←imageを使用したほうが処理が軽そう。
+   4. loop待機。
+   5. ESCやマウス処理の実装←BONUS範囲。
+2. 視点に合わせて、各点の座標を変換する。
+   1. 言うたら3次元を2次元に射影する的なね。
+3. 各点を線で結ぶ。
+   1. z座標は色を変更する必要がある。
+
+視点の回転と、物体の回転、どっちを行うべきか。
+firas曰く、objectが1つなので、これらは等価。そりゃそうか。相対的な位置関係は変わらないので。
