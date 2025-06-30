@@ -6,7 +6,7 @@
 /*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:55:13 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/06/30 17:36:36 by kei2003730       ###   ########.fr       */
+/*   Updated: 2025/06/30 17:44:32 by kei2003730       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strtrim(char const *s1, char const *set);
-int			ft_str_ends_with(const char *str, const char *suffix);
+int			ft_strrcmp(const char *str, const char *suffix);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif
