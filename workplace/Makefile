@@ -6,7 +6,7 @@
 #    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/06/30 15:13:05 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/06/30 15:25:54 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ NAME		:=	fdf
 #─ compile config ────────────────────────────────────────────────────────────
 
 CC			:=	cc
-CFLAGS		:=	-Iincludes -Ilibft -lXext -lX11
+CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft
+CCFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -lXext -lX11
 # CFLAGS		:=	-Iincludes -Ilibft
 # CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -fsanitize=address
 T_CFLAGS	:=	-Iincludes -Ilibft
@@ -87,7 +88,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT_A) $(OBJS_MAND)
 	@echo "Compiled with $(GREEN)$(BOLD)$(CFLAGS)$(RESET)"
-	@$(CC) $(CFLAGS)  $(OBJS_MAND) -o $@ $(LIBFT_A) $(LIBMLX)
+	@$(CC) $(CCFLAGS)  $(OBJS_MAND) -o $@ $(LIBFT_A) $(LIBMLX)
 	@echo "$(YELLOW)$(BOLD)========================================="
 	@echo "    You can use My $(NAME)!!"
 	@echo "=========================================$(RESET)"
