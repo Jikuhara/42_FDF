@@ -6,7 +6,7 @@
 #    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/06/30 15:03:05 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/06/30 15:13:05 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ NAME		:=	fdf
 #─ compile config ────────────────────────────────────────────────────────────
 
 CC			:=	cc
-CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft
+CFLAGS		:=	-Iincludes -Ilibft -lXext -lX11
 # CFLAGS		:=	-Iincludes -Ilibft
 # CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -fsanitize=address
 T_CFLAGS	:=	-Iincludes -Ilibft
@@ -54,6 +54,7 @@ MAND 		:=	mandatory
 OBJDIR		:=	obj
 LIBFT_DIR	:=	libft
 LIBFT_A		:=	$(LIBFT_DIR)/libft.a
+LIBMLX		:=	libmlx.a
 
 #─ sources & objects ─────────────────────────────────────────────────────────
 
@@ -68,7 +69,7 @@ SRCS_MAND	:=	src/main.c
 #object files
 
 OBJS_MAND	:=	$(SRCS_MAND:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
-# OBJS_BONUS 	:=	$(SRCS_BONUS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+# OBJS_BONUS	:=	$(SRCS_BONUS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 # OBJS	 	:=	$(OBJS_MAND) $(OBJS_BONUS)
 
 #test
@@ -86,7 +87,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT_A) $(OBJS_MAND)
 	@echo "Compiled with $(GREEN)$(BOLD)$(CFLAGS)$(RESET)"
-	@$(CC) $(CFLAGS)  $(OBJS_MAND) -o $@ $(LIBFT_A)
+	@$(CC) $(CFLAGS)  $(OBJS_MAND) -o $@ $(LIBFT_A) $(LIBMLX)
 	@echo "$(YELLOW)$(BOLD)========================================="
 	@echo "    You can use My $(NAME)!!"
 	@echo "=========================================$(RESET)"
