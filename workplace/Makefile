@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/06/30 15:25:54 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/06/30 17:49:04 by kei2003730       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,10 @@ LIBMLX		:=	libmlx.a
 
 #mandatory sources
 
-SRCS_MAND	:=	src/main.c
+SRCS_MAND	:=	src/main.c \
+		src/input_validation/input_validation.c \
+		src/input_validation/map_parser.c \
+		src/get_next_line.c
 
 #bonus sources
 
