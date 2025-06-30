@@ -3,23 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 15:30:02 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/06/30 15:41:02 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/06/30 17:36:39 by kei2003730       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	is_fdf_extention(char *filename)
+static int	is_fdf_extention(char *filename)
 {
-	char	*dot;
-
-	dot = ft_strrchr(filename, '.');
-	if (!dot || ft_strcmp(dot, ".fdf") != 0)
-		return (0);
-	return (1);
+	return (ft_strrcmp(filename, ".fdf") == 0);
 }
 
 void	input_validation(int argc, char *argv[])
@@ -27,7 +22,7 @@ void	input_validation(int argc, char *argv[])
 	int fd;
 	if (argc != 2)
 		return ;
-	if (is_fdf_extexntion(argv[1]))
+	if (!is_fdf_extention(argv[1]))
 		return ;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
