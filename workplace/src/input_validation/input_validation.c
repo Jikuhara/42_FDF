@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/21 20:45:40 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/06/30 15:40:34 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/06/30 15:30:02 by kjikuhar          #+#    #+#             */
+/*   Updated: 2025/06/30 15:41:02 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "fdf.h"
 
-# include "libft.h"
-# include "../../minilibx-linux/mlx.h"
-# include <fcntl.h>
+static void	is_fdf_extention(char *filename)
+{
+	char	*dot;
 
-#endif
+	dot = ft_strrchr(filename, '.');
+	if (!dot || ft_strcmp(dot, ".fdf") != 0)
+		return (0);
+	return (1);
+}
+
+void	input_validation(int argc, char *argv[])
+{
+	int fd;
+	if (argc != 2)
+		return ;
+	if (is_fdf_extexntion(argv[1]))
+		return ;
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return ;
+	close(fd);
+	return ;
+}

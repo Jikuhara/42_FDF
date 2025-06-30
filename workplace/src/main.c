@@ -6,12 +6,13 @@
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 20:45:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/06/30 15:12:16 by kjikuhar         ###   ########.fr       */
+/*   Updated: 2025/06/30 15:31:20 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+#if 0
 int	main(void)
 {
 	void *mlx;
@@ -35,4 +36,12 @@ int	main(void)
 	mlx_string_put(mlx, win, 0, 0, 0x00FFFFFF, "42Tokyo");
 	mlx_loop(mlx);
 	return (0);
+}
+
+#endif
+
+int main(int argc, char const *argv[])
+{
+	input_validation(argc, argv);
+	return 0;
 }
