@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/21 20:45:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/06/30 14:59:03 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/04/24 21:20:17 by kjikuhar          #+#    #+#             */
+/*   Updated: 2025/05/18 17:49:11 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int main(int argc, char const *argv[])
+int	ft_isalnum(int c)
 {
-	(void)argc;
-	(void)argv;
-	// mlx_init();
-	write(1, "a", 1);
-	return (0);
+	return (ft_isalpha(c) || ft_isdigit(c));
 }
+
+// #include <stdio.h>
+
+// int main(void)
+// {
+// 	for (int i = -5; i <= 258; i++)
+// 	{
+// 		char *str = (ft_isalnum(i) == 1) ? "OKKKK" : "NG";
+// 		printf("%3i, %4c : %2s\n", i,(char)i, str);
+// 	}
+// 	return (0);
+// }

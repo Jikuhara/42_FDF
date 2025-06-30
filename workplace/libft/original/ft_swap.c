@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/21 20:45:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/06/30 14:59:03 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/05/07 20:23:04 by kjikuhar          #+#    #+#             */
+/*   Updated: 2025/05/07 20:26:44 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int main(int argc, char const *argv[])
+void	ft_swap(int *a, int *b)
 {
-	(void)argc;
-	(void)argv;
-	// mlx_init();
-	write(1, "a", 1);
-	return (0);
+	int	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
+
+// int main(void)
+// {
+// 	int a = 42;
+// 	int b = 24;
+
+// 	printf("Before: a = %2d, b = %2d\n", a, b);
+// 	ft_swap(&a, &b);
+// 	printf("After : a = %2d, b = %2d\n", a, b);
+// 	return (0);
+// }

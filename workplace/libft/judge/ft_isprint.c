@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/21 20:45:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/06/30 14:59:03 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/04/24 21:20:17 by kjikuhar          #+#    #+#             */
+/*   Updated: 2025/05/02 23:13:00 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-
-int main(int argc, char const *argv[])
+int	ft_isprint(int c)
 {
-	(void)argc;
-	(void)argv;
-	// mlx_init();
-	write(1, "a", 1);
-	return (0);
+	return ((unsigned)c - 0x20 < 0x5f);
 }
+
+// #include <stdio.h>
+
+// int main(void)
+// {
+// 	for (int i = -5; i <= 258; i++)
+// 	{
+// 		char *str = (ft_isprint(i) == 1) ? "OKKK" : "NG";
+// 		printf("%3i, %4c : %2s\n", i,(char)i, str);
+// 	}
+// 	return (0);
+// }

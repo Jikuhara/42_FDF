@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/21 20:45:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/06/30 14:59:03 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/04/28 15:40:38 by kjikuhar          #+#    #+#             */
+/*   Updated: 2025/05/04 19:00:25 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int main(int argc, char const *argv[])
+/* Iterates the list and applies the function f on the content of each node */
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	(void)argc;
-	(void)argv;
-	// mlx_init();
-	write(1, "a", 1);
-	return (0);
+	if (!f)
+		return ;
+	while (lst)
+	{
+		if (lst->content)
+			(*f)(lst->content);
+		lst = lst->next;
+	}
 }

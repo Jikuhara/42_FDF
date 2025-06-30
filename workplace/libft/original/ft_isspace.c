@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/21 20:45:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/06/30 14:59:03 by kjikuhar         ###   ########.fr       */
+/*   Created: 2025/05/11 18:12:36 by kjikuhar          #+#    #+#             */
+/*   Updated: 2025/05/11 18:14:44 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int main(int argc, char const *argv[])
+int	ft_isspace(const char c)
 {
-	(void)argc;
-	(void)argv;
-	// mlx_init();
-	write(1, "a", 1);
-	return (0);
+	return ((9 <= c && c <= 13) || c == 32);
 }
