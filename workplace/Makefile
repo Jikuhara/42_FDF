@@ -6,7 +6,7 @@
 #    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/06/30 14:58:30 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/06/30 15:03:05 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ SRCS_MAND	:=	src/main.c
 #object files
 
 OBJS_MAND	:=	$(SRCS_MAND:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
-# OBJS_BONUS	:=	$(SRCS_BONUS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+# OBJS_BONUS 	:=	$(SRCS_BONUS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 # OBJS	 	:=	$(OBJS_MAND) $(OBJS_BONUS)
 
 #test
