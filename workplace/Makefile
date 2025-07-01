@@ -6,7 +6,7 @@
 #    By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/06/30 17:49:04 by kei2003730       ###   ########.fr        #
+#    Updated: 2025/06/30 18:06:48 by kei2003730       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,18 +128,48 @@ re: fclean all
 # 	@echo "  You can use My Bonus_$(NAME)!!"
 # 	@echo "=========================================$(RESET)"
 
-# test: $(NAME)
-# 	@norminette $(SRCS_MAND) $(SRCS_BONUS)
-# 	@$(CC) $(T_CFLAGS) $(TEST) $(NAME) -o $(OBJ_T)
-# 	@valgrind --leak-check=full ./$(OBJ_T)
-# 	@rm $(OBJ_T)
-# 	fclean
+# ノルムチェック
+norm:
+	@echo "$(CYAN)$(BOLD)========================================="
+	@echo "    Checking 42 Norm..."
+	@echo "=========================================$(RESET)"
+	@norminette $(SRCS_MAND) includes/fdf.h
+	@echo "$(GREEN)$(BOLD)Norm check completed!$(RESET)"
 
-# test_bonus: bonus
-# 	@$(CC) $(T_CFLAGS) $(TEST) $(NAME) -o $(OBJ_T)
-# 	@valgrind --leak-check=full ./$(OBJ_T)
-# 	@rm $(OBJ_T)
-# 	fclean
+# リークチェック
+leak: $(NAME)
+	@echo "$(MAGENTA)$(BOLD)========================================="
+	@echo "    Checking Memory Leaks..."
+	@echo "=========================================$(RESET)"
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./$(NAME) test.fdf
+	@echo "$(GREEN)$(BOLD)Leak check completed!$(RESET)"
+
+# フルテスト（ノルム + リーク）
+test: norm leak
+	@echo "$(GREEN)$(BOLD)========================================="
+	@echo "    All tests completed!"
+	@echo "=========================================$(RESET)"
+
+# デバッグビルド（fsanitize付き）
+debug: CFLAGS := -Wall -Wextra -Werror -Iincludes -Ilibft -g -fsanitize=address
+debug: CCFLAGS := -Wall -Wextra -Werror -Iincludes -Ilibft -lXext -lX11 -g -fsanitize=address
+debug: re
+	@echo "$(YELLOW)$(BOLD)Debug build completed with fsanitize!$(RESET)"
+
+# 軽量テスト（引数チェックのみ）
+quicktest: $(NAME)
+	@echo "$(BLUE)$(BOLD)========================================="
+	@echo "    Quick Test..."
+	@echo "=========================================$(RESET)"
+	@echo "Testing with no arguments:"
+	@./$(NAME) || true
+	@echo "Testing with wrong extension:"
+	@./$(NAME) test.txt || true
+	@echo "Testing with non-existent file:"
+	@./$(NAME) nonexistent.fdf || true
+	@echo "Testing with valid file:"
+	@./$(NAME) test.fdf
+	@echo "$(GREEN)$(BOLD)Quick test completed!$(RESET)"
 
 
-.PHONY: all clean fclean re bonus test
+.PHONY: all clean fclean re norm leak test debug quicktest

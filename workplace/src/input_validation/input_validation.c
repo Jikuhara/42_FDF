@@ -6,7 +6,7 @@
 /*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 15:30:02 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/06/30 17:59:25 by kei2003730       ###   ########.fr       */
+/*   Updated: 2025/06/30 18:06:47 by kei2003730       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,23 @@ static int	is_fdf_extention(char *filename)
 void	input_validation(int argc, char *argv[])
 {
 	int	fd;
-	int	**map;
-	int	rows;
-	int	cols;
-	int	i;
-	int	j;
 
 	if (argc != 2)
-		return ;
+	{
+		write(2, "Usage: ./fdf <filename>.fdf\n", 29);
+		exit(1);
+	}
 	if (!is_fdf_extention(argv[1]))
-		return ;
+	{
+		write(2, "Error: File must have .fdf extension\n", 38);
+		exit(1);
+	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return ;
-	input_validation(argc, argv);
-	if (parse_map(argv[1], &map, &rows, &cols) < 0)
 	{
-		write(2, "Error: Failed to parse map\n", 28);
-		return (1);
+		write(2, "Error: Cannot open file\n", 25);
+		exit(1);
 	}
-	printf("Map size: %d x %d\n", rows, cols);
-	i = 0;
-	while (i < rows)
-	{
-		j = 0;
-		while (j < cols)
-		{
-			printf("%3d ", map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-	free_map(map, rows);
-	return (0);
+	close(fd);
+	return;
 }
