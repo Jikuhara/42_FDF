@@ -6,7 +6,7 @@
 /*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:55:13 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/07/01 13:47:21 by kei2003730       ###   ########.fr       */
+/*   Updated: 2025/07/01 14:21:33 by kei2003730       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void		*ft_memset(void *s, int c, size_t n);
 // original functions
 void		ft_swap(int *a, int *b);
 int			ft_isspace(const char c);
+int			ft_abs_int(int n);
+long		ft_abs_long(long n);
+long long	ft_abs_long_long(long long n);
 int			ft_max_int(int a, int b, int *m);
 long		ft_max_long(long a, long b);
 long long	ft_max_long_long(long long a, long long b);

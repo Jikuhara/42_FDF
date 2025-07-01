@@ -6,7 +6,7 @@
 #    By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 16:00:02 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/07/01 13:47:23 by kei2003730       ###   ########.fr        #
+#    Updated: 2025/07/01 14:22:48 by kei2003730       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRCS	=	conversion/ft_atoi.c \
 			original/ft_max.c \
 			original/ft_min.c \
 			original/ft_isspace.c \
+			original/ft_abs.c \
 			get_next_line/get_next_line.c
 
 BLACK	:=	\033[30m
