@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_main.c                                          :+:      :+:    :+:   */
+/*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/21 20:45:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/07/01 16:07:59 by kei2003730       ###   ########.fr       */
+/*   Created: 2025/07/01 10:30:00 by kei2003730       #+#    #+#             */
+/*   Updated: 2025/07/01 10:30:00 by kei2003730       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	initialize_graphics(t_fdf **fdf, int **map, int rows, int cols)
+void	calculate_projection_params(t_fdf *fdf)
 {
-	*fdf = init_fdf(map, rows, cols);
-	if (!*fdf)
+	fdf->zoom = ZOOM_FACTOR;
+	if (fdf->cols > 50 || fdf->rows > 50)
 	{
-		write(2, "Error: Failed to initialize graphics\n", 38);
-		free_map(map, rows);
-		exit(1);
+		fdf->zoom = ZOOM_FACTOR / 2;
 	}
-	if (init_image(*fdf) < 0)
+	if (fdf->cols > 100 || fdf->rows > 100)
 	{
-		write(2, "Error: Failed to initialize image\n", 35);
-		cleanup_fdf(*fdf);
-		free_map(map, rows);
-		exit(1);
+		fdf->zoom = ZOOM_FACTOR / 4;
 	}
+	fdf->offset_x = WIN_WIDTH / 2;
+	fdf->offset_y = WIN_HEIGHT / 2;
 }

@@ -12,9 +12,44 @@
 
 #include "fdf.h"
 
-void	render_to_window(t_fdf *fdf)
+void	my_mlx_pixel_put(t_fdf *fdf, int x, int y, int color)
 {
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
+	char	*dst;
+
+	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
+	{
+		dst = fdf->addr + (y * fdf->line_length + x * \
+(fdf->bits_per_pixel / 8));
+		*(unsigned int *)dst = color;
+	}
+}
+
+void	clear_image(t_fdf *fdf)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < WIN_HEIGHT)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
+		{
+			my_mlx_pixel_put(fdf, x, y, COLOR_BLACK);
+			x++;
+		}
+		y++;
+	}
+}
+
+t_point	create_3d_point(int x, int y, int z)
+{
+	t_point	point;
+
+	point.x = (float)x;
+	point.y = (float)y;
+	point.z = (float)z;
+	return (point);
 }
 
 void	cleanup_fdf(t_fdf *fdf)

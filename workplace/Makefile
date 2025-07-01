@@ -6,7 +6,7 @@
 #    By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/07/01 14:52:40 by kei2003730       ###   ########.fr        #
+#    Updated: 2025/07/01 16:16:04 by kei2003730       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,8 @@ NAME		:=	fdf
 #─ compile config ────────────────────────────────────────────────────────────
 
 CC			:=	cc
-CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -Isrc/map_parse
-CCFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -Isrc/map_parse -lXext -lX11 -lm
+CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -Isrc/01_parse_map
+CCFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -Isrc/01_parse_map -lXext -lX11 -lm
 # CFLAGS		:=	-Iincludes -Ilibft
 # CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -fsanitize=address
 T_CFLAGS	:=	-Iincludes -Ilibft
@@ -56,7 +56,7 @@ OBJDIR		:=	obj
 LIBFT_DIR	:=	libft
 LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 LIBMLX		:=	libmlx.a
-MAP_PARSE_DIR	:=	src/map_parse
+MAP_PARSE_DIR	:=	src/01_parse_map
 MAP_PARSE_A	:=	$(MAP_PARSE_DIR)/map_parse.a
 
 #─ sources & objects ─────────────────────────────────────────────────────────
@@ -64,12 +64,17 @@ MAP_PARSE_A	:=	$(MAP_PARSE_DIR)/map_parse.a
 #mandatory sources
 
 SRCS_MAND	:=	src/main.c \
-		src/input_validation/input_validation.c \
-		src/graphics/graphics.c \
-		src/graphics/draw.c \
-		src/graphics/events.c \
-		src/graphics/99_utils.c \
-		src/graphics/projection.c
+		src/99_utils.c \
+		src/00_input_validation/00_main.c \
+		src/02_initalize_graphics/00_main.c \
+		src/02_initalize_graphics/01_init_fdf.c \
+		src/02_initalize_graphics/02_init_image.c \
+		src/03_setup_events/00_main.c \
+		src/04_calculate_projection_params/00_main.c \
+		src/05_draw_map/00_main.c \
+		src/05_draw_map/draw.c \
+		src/05_draw_map/graphics.c \
+		src/05_draw_map/projection.c
 
 #object files
 

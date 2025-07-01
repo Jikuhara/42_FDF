@@ -12,42 +12,26 @@
 
 #include "fdf.h"
 
-void	my_mlx_pixel_put(t_fdf *fdf, int x, int y, int color)
+void	render_to_window(t_fdf *fdf)
 {
-	char	*dst;
-
-	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
-	{
-		dst = fdf->addr + (y * fdf->line_length + x * \
-(fdf->bits_per_pixel / 8));
-		*(unsigned int *)dst = color;
-	}
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
 }
 
-void	clear_image(t_fdf *fdf)
+t_screen_point	project_point(t_point point3d, t_fdf *fdf)
 {
-	int	x;
-	int	y;
+	t_screen_point	screen_point;
+	float			iso_x;
+	float			iso_y;
 
-	y = 0;
-	while (y < WIN_HEIGHT)
-	{
-		x = 0;
-		while (x < WIN_WIDTH)
-		{
-			my_mlx_pixel_put(fdf, x, y, COLOR_BLACK);
-			x++;
-		}
-		y++;
-	}
-}
-
-t_point	create_3d_point(int x, int y, int z)
-{
-	t_point	point;
-
-	point.x = (float)x;
-	point.y = (float)y;
-	point.z = (float)z;
-	return (point);
+	iso_x = (point3d.x - point3d.y) * cos(ISO_ANGLE);
+	iso_y = (point3d.x + point3d.y) * sin(ISO_ANGLE) - point3d.z;
+	screen_point.x = (int)(iso_x * fdf->zoom) + fdf->offset_x;
+	screen_point.y = (int)(iso_y * fdf->zoom) + fdf->offset_y;
+	if (point3d.z == 0)
+		screen_point.color = COLOR_WHITE;
+	else if (point3d.z > 0)
+		screen_point.color = COLOR_RED;
+	else
+		screen_point.color = COLOR_BLUE;
+	return (screen_point);
 }

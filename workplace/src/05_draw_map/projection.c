@@ -12,41 +12,7 @@
 
 #include "fdf.h"
 
-t_screen_point	project_point(t_point point3d, t_fdf *fdf)
-{
-	t_screen_point	screen_point;
-	float			iso_x;
-	float			iso_y;
-
-	iso_x = (point3d.x - point3d.y) * cos(ISO_ANGLE);
-	iso_y = (point3d.x + point3d.y) * sin(ISO_ANGLE) - point3d.z;
-	screen_point.x = (int)(iso_x * fdf->zoom) + fdf->offset_x;
-	screen_point.y = (int)(iso_y * fdf->zoom) + fdf->offset_y;
-	if (point3d.z == 0)
-		screen_point.color = COLOR_WHITE;
-	else if (point3d.z > 0)
-		screen_point.color = COLOR_RED;
-	else
-		screen_point.color = COLOR_BLUE;
-	return (screen_point);
-}
-
-void	calculate_projection_params(t_fdf *fdf)
-{
-	fdf->zoom = ZOOM_FACTOR;
-	if (fdf->cols > 50 || fdf->rows > 50)
-	{
-		fdf->zoom = ZOOM_FACTOR / 2;
-	}
-	if (fdf->cols > 100 || fdf->rows > 100)
-	{
-		fdf->zoom = ZOOM_FACTOR / 4;
-	}
-	fdf->offset_x = WIN_WIDTH / 2;
-	fdf->offset_y = WIN_HEIGHT / 2;
-}
-
-static void	find_min_max_z(t_fdf *fdf, int *min_z, int *max_z)
+void	find_min_max_z(t_fdf *fdf, int *min_z, int *max_z)
 {
 	int	x;
 	int	y;
@@ -69,7 +35,7 @@ static void	find_min_max_z(t_fdf *fdf, int *min_z, int *max_z)
 	}
 }
 
-static t_screen_point	get_screen_point(t_fdf *fdf, int x, int y,
+t_screen_point	get_screen_point(t_fdf *fdf, int x, int y,
 										int min_z, int max_z)
 {
 	t_point			point3d;
@@ -81,7 +47,7 @@ static t_screen_point	get_screen_point(t_fdf *fdf, int x, int y,
 	return (screen_point);
 }
 
-static void	draw_horizontal_lines(t_fdf *fdf, int min_z, int max_z)
+void	draw_horizontal_lines(t_fdf *fdf, int min_z, int max_z)
 {
 	int				x;
 	int				y;
@@ -103,7 +69,7 @@ static void	draw_horizontal_lines(t_fdf *fdf, int min_z, int max_z)
 	}
 }
 
-static void	draw_vertical_lines(t_fdf *fdf, int min_z, int max_z)
+void	draw_vertical_lines(t_fdf *fdf, int min_z, int max_z)
 {
 	int				x;
 	int				y;

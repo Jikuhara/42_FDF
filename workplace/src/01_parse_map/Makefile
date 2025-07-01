@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/07/01 12:55:33 by kei2003730        #+#    #+#              #
-#    Updated: 2025/07/01 13:32:51 by kei2003730       ###   ########.fr        #
+#    Created: 2025/07/01 16:15:00 by kei2003730        #+#    #+#              #
+#    Updated: 2025/07/01 16:06:30 by kei2003730       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,18 +25,17 @@ ARFLAGS		:= rcs
 
 #─ directory name ────────────────────────────────────────────────────────────
 
-SRCDIR		:= src
 OBJDIR		:= obj
 
 #─ sources & objects ─────────────────────────────────────────────────────────
 
-SRCS		:= src/00_main.c \
-		   src/01_get_map_dimentions.c \
-		   src/02_allocate_map_memory.c \
-		   src/03_fill_map_data.c \
-		   src/99_utils.c
+SRCS		:= 00_main.c \
+		   01_get_map_dimentions.c \
+		   02_allocate_map_memory.c \
+		   03_fill_map_data.c \
+		   99_utils.c
 
-OBJS		:= $(SRCS:src/%.c=$(OBJDIR)/%.o)
+OBJS		:= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 #─ colors ────────────────────────────────────────────────────────────────────
 
@@ -48,7 +47,7 @@ RESET		:= \033[0m
 BOLD		:= \033[1m
 
 #-----------------------------------------------------------------------------
-#▸ rules
+#> rules
 #-----------------------------------------------------------------------------
 
 all: $(NAME)
@@ -59,7 +58,7 @@ $(NAME): $(OBJS)
 	@echo "    $(NAME) created successfully!"
 	@echo "=========================================$(RESET)"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
+$(OBJDIR)/%.o: %.c
 	@mkdir -p $(OBJDIR)
 	@echo "Compiled ✅ $(WHITE)$(BOLD) $< $(RESET)"
 	@$(CC) $(CFLAGS) -c -o $@ $<
@@ -83,7 +82,7 @@ norm:
 	@echo "$(GREEN)$(BOLD)Norm check completed!$(RESET)"
 
 # テスト実行
-test: $(NAME) norm test-valgrind
+test: $(NAME) norm
 	@echo "$(YELLOW)$(BOLD)========================================="
 	@echo "    Building and running tests..."
 	@echo "=========================================$(RESET)"
@@ -93,63 +92,4 @@ test: $(NAME) norm test-valgrind
 	@./test_map_parse
 	@echo "$(GREEN)$(BOLD)Tests completed!$(RESET)"
 
-# テストファイルのクリーンアップ
-test-clean:
-	@rm -f test_map_parse *.fdf
-	@echo "$(CYAN)Test files cleaned.$(RESET)"
-
-# メモリリークチェック（valgrind使用）
-test-valgrind: $(NAME)
-	@echo "$(YELLOW)$(BOLD)========================================="
-	@echo "    Running tests with Valgrind..."
-	@echo "=========================================$(RESET)"
-	@$(CC) $(CFLAGS) -g -o test_map_parse test_map_parse.c $(NAME)
-	@echo "$(GREEN)Test executable created with debug info$(RESET)"
-	@echo "$(CYAN)Running Valgrind memory check...$(RESET)"
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --error-exitcode=1 ./test_map_parse
-	@echo "$(GREEN)$(BOLD)Valgrind check completed!$(RESET)"
-
-# パフォーマンステスト
-test-performance: $(NAME)
-	@echo "$(YELLOW)$(BOLD)========================================="
-	@echo "    Running performance tests..."
-	@echo "=========================================$(RESET)"
-	@$(CC) $(CFLAGS) -O3 -o test_map_parse_perf test_map_parse.c $(NAME)
-	@echo "$(GREEN)Performance test executable created$(RESET)"
-	@echo "$(CYAN)Running performance tests...$(RESET)"
-	@time ./test_map_parse_perf > /dev/null
-	@rm -f test_map_parse_perf
-	@echo "$(GREEN)$(BOLD)Performance tests completed!$(RESET)"
-
-# ヘッダーファイルをincludesディレクトリにコピー
-install-header:
-	@cp map_parse.h ../../includes/
-	@echo "$(GREEN)$(BOLD)Header file installed to ../../includes/$(RESET)"
-
-# 使用例の表示
-usage:
-	@echo "$(CYAN)$(BOLD)========================================="
-	@echo "    map_parse library usage:"
-	@echo "=========================================$(RESET)"
-	@echo "1. Include the header: #include \"map_parse.h\""
-	@echo "2. Link the library: -L. -lmap_parse"
-	@echo "3. Main function: parse_map(filename, &map, &rows, &cols)"
-	@echo "4. Clean up: free_map(map, rows)"
-	@echo ""
-	@echo "$(YELLOW)Available make targets:$(RESET)"
-	@echo "- make          : Build the library"
-	@echo "- make test     : Run basic test suite"
-	@echo "- make test-valgrind : Run tests with memory leak detection"
-	@echo "- make test-performance : Run performance benchmarks"
-	@echo "- make norm     : Check 42 Norm compliance"
-	@echo "- make clean    : Remove object files"
-	@echo "- make fclean   : Remove all build files"
-	@echo ""
-	@echo "$(YELLOW)External dependencies needed:$(RESET)"
-	@echo "- get_next_line(int fd)"
-	@echo "- ft_split(char const *s, char c)"
-	@echo "- ft_free_split(char **split)"
-	@echo "- ft_atoi(const char *str)"
-
-.PHONY: all clean fclean re norm test test-clean test-valgrind test-performance install-header usage
-
+.PHONY: all clean fclean re norm test
