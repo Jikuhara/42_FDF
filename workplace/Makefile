@@ -6,7 +6,7 @@
 #    By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/07/01 12:14:30 by kei2003730       ###   ########.fr        #
+#    Updated: 2025/07/01 13:47:19 by kei2003730       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,8 @@ NAME		:=	fdf
 #─ compile config ────────────────────────────────────────────────────────────
 
 CC			:=	cc
-CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft
-CCFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -lXext -lX11 -lm
+CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -Isrc/map_parse
+CCFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -Isrc/map_parse -lXext -lX11 -lm
 # CFLAGS		:=	-Iincludes -Ilibft
 # CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -fsanitize=address
 T_CFLAGS	:=	-Iincludes -Ilibft
@@ -56,6 +56,8 @@ OBJDIR		:=	obj
 LIBFT_DIR	:=	libft
 LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 LIBMLX		:=	libmlx.a
+MAP_PARSE_DIR	:=	src/map_parse
+MAP_PARSE_A	:=	$(MAP_PARSE_DIR)/map_parse.a
 
 #─ sources & objects ─────────────────────────────────────────────────────────
 
@@ -63,28 +65,13 @@ LIBMLX		:=	libmlx.a
 
 SRCS_MAND	:=	src/main.c \
 		src/input_validation/input_validation.c \
-		src/input_validation/get_next_line.c \
-		src/map_parse/get_map_dimentions.c \
-		src/input_validation/map_parser.c \
-		src/input_validation/map_memory.c \
 		src/graphics/graphics.c \
 		src/graphics/events.c \
 		src/graphics/projection.c
 
-#bonus sources
-
-# SRCS_BONUS	:=
-
 #object files
 
 OBJS_MAND	:=	$(SRCS_MAND:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
-# OBJS_BONUS	:=	$(SRCS_BONUS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
-# OBJS	 	:=	$(OBJS_MAND) $(OBJS_BONUS)
-
-#test
-
-# TEST        := test/test_printf.c
-# OBJ_T       := $(TEST:.c=.o)
 
 #-----------------------------------------------------------------------------
 
@@ -94,9 +81,9 @@ OBJS_MAND	:=	$(SRCS_MAND:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT_A) $(OBJS_MAND)
+$(NAME): $(LIBFT_A) $(MAP_PARSE_A) $(OBJS_MAND)
 	@echo "Compiled with $(GREEN)$(BOLD)$(CFLAGS)$(RESET)"
-	@$(CC) $(OBJS_MAND) -o $@ $(LIBFT_A) $(LIBMLX) $(CCFLAGS)
+	@$(CC) $(OBJS_MAND) -o $@ $(MAP_PARSE_A) $(LIBFT_A) $(LIBMLX) $(CCFLAGS)
 	@echo "$(YELLOW)$(BOLD)========================================="
 	@echo "    You can use My $(NAME)!!"
 	@echo "=========================================$(RESET)"
@@ -113,14 +100,21 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 $(LIBFT_A):
 	@$(MAKE) -C $(LIBFT_DIR)
 
+# map_parse
+
+$(MAP_PARSE_A): $(LIBFT_A)
+	@$(MAKE) -C $(MAP_PARSE_DIR)
+
 # clean targets
 
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(MAP_PARSE_DIR) clean
 	@rm -rf $(OBJDIR)
 
 fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(MAP_PARSE_DIR) fclean
 	@rm -f $(NAME)
 
 re: fclean all
