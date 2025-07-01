@@ -6,7 +6,7 @@
 #    By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/06/30 18:06:48 by kei2003730       ###   ########.fr        #
+#    Updated: 2025/07/01 10:10:56 by kei2003730       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ NAME		:=	fdf
 
 CC			:=	cc
 CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft
-CCFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -lXext -lX11
+CCFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -lXext -lX11 -lm
 # CFLAGS		:=	-Iincludes -Ilibft
 # CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -fsanitize=address
 T_CFLAGS	:=	-Iincludes -Ilibft
@@ -64,7 +64,9 @@ LIBMLX		:=	libmlx.a
 SRCS_MAND	:=	src/main.c \
 		src/input_validation/input_validation.c \
 		src/input_validation/map_parser.c \
-		src/get_next_line.c
+		src/get_next_line.c \
+		src/graphics.c \
+		src/events.c
 
 #bonus sources
 
@@ -91,7 +93,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT_A) $(OBJS_MAND)
 	@echo "Compiled with $(GREEN)$(BOLD)$(CFLAGS)$(RESET)"
-	@$(CC) $(CCFLAGS)  $(OBJS_MAND) -o $@ $(LIBFT_A) $(LIBMLX)
+	@$(CC) $(OBJS_MAND) -o $@ $(LIBFT_A) $(LIBMLX) $(CCFLAGS)
 	@echo "$(YELLOW)$(BOLD)========================================="
 	@echo "    You can use My $(NAME)!!"
 	@echo "=========================================$(RESET)"

@@ -6,7 +6,7 @@
 /*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 20:45:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/06/30 17:55:26 by kei2003730       ###   ########.fr       */
+/*   Updated: 2025/07/01 10:10:51 by kei2003730       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,53 @@ int	main(void)
 
 int	main(int argc, char *argv[])
 {
-	int	**map;
-	int	rows;
-	int	cols;
-	int	i;
-	int	j;
+	int		**map;
+	int		rows;
+	int		cols;
+	t_fdf	*fdf;
 
+	/* 入力検証 */
 	input_validation(argc, argv);
+
+	/* mapデータを解析 */
 	if (parse_map(argv[1], &map, &rows, &cols) < 0)
 	{
 		write(2, "Error: Failed to parse map\n", 28);
 		return (1);
 	}
-	printf("Map size: %d x %d\n", rows, cols);
-	i = 0;
-	while (i < rows)
+
+	/* グラフィック環境の初期化 */
+	fdf = init_fdf(map, rows, cols);
+	if (!fdf)
 	{
-		j = 0;
-		while (j < cols)
-		{
-			printf("%3d ", map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
+		write(2, "Error: Failed to initialize graphics\n", 38);
+		free_map(map, rows);
+		return (1);
 	}
-	free_map(map, rows);
+
+	/* イメージシステムの初期化 */
+	if (init_image(fdf) < 0)
+	{
+		write(2, "Error: Failed to initialize image\n", 35);
+		cleanup_fdf(fdf);
+		free_map(map, rows);
+		return (1);
+	}
+
+	/* イベント設定 */
+	setup_events(fdf);
+
+	/* 初期描画 */
+	clear_image(fdf);
+
+	/* 中央に白いピクセルを描画（テスト用） */
+	my_mlx_pixel_put(fdf, WIN_WIDTH / 2, WIN_HEIGHT / 2, COLOR_WHITE);
+
+	/* 画面に表示 */
+	render_to_window(fdf);
+
+	/* メインループ */
+	mlx_loop(fdf->mlx);
+
 	return (0);
 }
