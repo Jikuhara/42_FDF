@@ -23,6 +23,12 @@ t_fdf	*init_fdf(int **map, int rows, int cols)
 	fdf->map = map;
 	fdf->rows = rows;
 	fdf->cols = cols;
+
+	/* 投影パラメータの初期化 */
+	fdf->zoom = ZOOM_FACTOR;
+	fdf->offset_x = WIN_WIDTH / 2;
+	fdf->offset_y = WIN_HEIGHT / 2;
+
 	fdf->mlx = mlx_init();
 	if (!fdf->mlx)
 	{

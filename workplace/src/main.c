@@ -6,7 +6,7 @@
 /*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 20:45:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/07/01 10:10:51 by kei2003730       ###   ########.fr       */
+/*   Updated: 2025/07/01 10:37:59 by kei2003730       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,11 @@ int	main(int argc, char *argv[])
 	/* イベント設定 */
 	setup_events(fdf);
 
-	/* 初期描画 */
-	clear_image(fdf);
+	/* 投影パラメータの計算 */
+	calculate_projection_params(fdf);
 
-	/* 中央に白いピクセルを描画（テスト用） */
-	my_mlx_pixel_put(fdf, WIN_WIDTH / 2, WIN_HEIGHT / 2, COLOR_WHITE);
-
-	/* 画面に表示 */
-	render_to_window(fdf);
+	/* マップを描画 */
+	draw_map(fdf);
 
 	/* メインループ */
 	mlx_loop(fdf->mlx);
