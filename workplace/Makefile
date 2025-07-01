@@ -6,7 +6,7 @@
 #    By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/07/01 10:37:59 by kei2003730       ###   ########.fr        #
+#    Updated: 2025/07/01 12:14:30 by kei2003730       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,8 +63,10 @@ LIBMLX		:=	libmlx.a
 
 SRCS_MAND	:=	src/main.c \
 		src/input_validation/input_validation.c \
-		src/input_validation/map_parser.c \
 		src/input_validation/get_next_line.c \
+		src/map_parse/get_map_dimentions.c \
+		src/input_validation/map_parser.c \
+		src/input_validation/map_memory.c \
 		src/graphics/graphics.c \
 		src/graphics/events.c \
 		src/graphics/projection.c
@@ -122,14 +124,6 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
-
-# bonus: $(LIBFT_A) $(OBJS_BONUS)
-# 	@cp $(LIBFT_A) $(NAME)
-# 	@echo "Compiled with $(GREEN)$(BOLD)$(CFLAGS)$(RESET)"
-# 	@ar rcs $(NAME) $(OBJS_BONUS)
-# 	@echo "$(YELLOW)$(BOLD)========================================="
-# 	@echo "  You can use My Bonus_$(NAME)!!"
-# 	@echo "=========================================$(RESET)"
 
 # ノルムチェック
 norm:

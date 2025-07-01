@@ -6,7 +6,7 @@
 /*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:55:13 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/06/30 17:44:32 by kei2003730       ###   ########.fr       */
+/*   Updated: 2025/07/01 11:52:36 by kei2003730       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void		ft_putstr_fd(char *s, int fd);
 
 // string
 char		**ft_split(char const *s, char c);
+void		ft_free_split(char **split);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strdup(const char *s);
 void		ft_striteri(char *s, void (*f)(unsigned int, char *));
@@ -88,10 +89,10 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 size_t		ft_strlen(const char *s);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_strrcmp(const char *str, const char *suffix);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strtrim(char const *s1, char const *set);
-int			ft_strrcmp(const char *str, const char *suffix);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif

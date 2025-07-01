@@ -6,7 +6,7 @@
 #    By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/04 16:00:02 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/06/30 17:36:27 by kei2003730       ###   ########.fr        #
+#    Updated: 2025/07/01 11:54:08 by kei2003730       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS	=	conversion/ft_atoi.c \
 			output/ft_putnbr_fd.c \
 			output/ft_putstr_fd.c \
 			string/ft_split.c \
+			string/ft_free_split.c \
 			string/ft_strchr.c \
 			string/ft_strdup.c \
 			string/ft_strrcmp.c \

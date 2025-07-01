@@ -6,7 +6,7 @@
 /*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 20:45:40 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/07/01 10:37:59 by kei2003730       ###   ########.fr       */
+/*   Updated: 2025/07/01 12:19:12 by kei2003730       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,11 @@ typedef struct s_fdf
 void	input_validation(int argc, char *argv[]);
 
 /* map_parser.c */
-int		parse_map(char *filename, int ***map, int *rows, int *cols);
+void	parse_map(char *filename, int ***map, int *rows, int *cols);
 void	free_map(int **map, int rows);
-void	free_split(char **split);
+
+/* get_map_dimentions.c */
+void	get_map_dimentions(char *filename, int *rows, int *cols);
 
 /* graphics.c */
 t_fdf	*init_fdf(int **map, int rows, int cols);
