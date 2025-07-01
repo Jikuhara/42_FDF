@@ -6,7 +6,7 @@
 /*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 20:45:40 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/07/01 16:16:30 by kei2003730       ###   ########.fr       */
+/*   Updated: 2025/07/01 16:26:36 by kei2003730       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # include <unistd.h>
 
 # define ESC_KEY 65307
+# define PLUS_KEY 61
+# define MINUS_KEY 45
+# define NUM_PLUS_KEY 65451
+# define NUM_MINUS_KEY 65453
+# define MOUSE_WHEEL_UP 4
+# define MOUSE_WHEEL_DOWN 5
 
 # define COLOR_WHITE 0xFFFFFF
 # define COLOR_RED 0xFF0000
@@ -96,6 +102,7 @@ void			draw_line_pixels(t_fdf *fdf, t_screen_point p1,
 int				close_program(t_fdf *fdf);
 int				key_press(int keycode, t_fdf *fdf);
 int				close_window(t_fdf *fdf);
+int				mouse_hook(int button, int x, int y, t_fdf *fdf);
 void			setup_events(t_fdf *fdf);
 
 /* projection.c */
