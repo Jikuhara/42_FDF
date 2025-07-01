@@ -6,7 +6,7 @@
 /*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 20:45:40 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/07/01 12:19:12 by kei2003730       ###   ########.fr       */
+/*   Updated: 2025/07/01 14:44:34 by kei2003730       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,19 @@ void	free_map(int **map, int rows);
 void	get_map_dimentions(char *filename, int *rows, int *cols);
 
 /* graphics.c */
-t_fdf	*init_fdf(int **map, int rows, int cols);
-int		init_image(t_fdf *fdf);
-void	my_mlx_pixel_put(t_fdf *fdf, int x, int y, int color);
-void	clear_image(t_fdf *fdf);
-void	render_to_window(t_fdf *fdf);
-void	cleanup_fdf(t_fdf *fdf);
+t_fdf		*init_fdf(int **map, int rows, int cols);
+int			init_image(t_fdf *fdf);
+void		my_mlx_pixel_put(t_fdf *fdf, int x, int y, int color);
+void		clear_image(t_fdf *fdf);
+void		render_to_window(t_fdf *fdf);
+void		cleanup_fdf(t_fdf *fdf);
+
+/* draw.c */
+int			get_color_by_height(int z, int min_z, int max_z);
+int			interpolate_color(int color1, int color2, float ratio);
+void		draw_line(t_fdf *fdf, t_screen_point p1, t_screen_point p2);
+void		draw_line_pixels(t_fdf *fdf, t_screen_point p1, t_screen_point p2,
+				float x_inc, float y_inc);
 
 /* events.c */
 int		close_program(t_fdf *fdf);

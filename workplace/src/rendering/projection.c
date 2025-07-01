@@ -12,17 +12,6 @@
 
 #include "fdf.h"
 
-/* 3D座標を作成 */
-t_point	create_3d_point(int x, int y, int z)
-{
-	t_point	point;
-
-	point.x = (float)x;
-	point.y = (float)y;
-	point.z = (float)z;
-	return (point);
-}
-
 t_screen_point	project_point(t_point point3d, t_fdf *fdf)
 {
 	t_screen_point	screen_point;
@@ -57,37 +46,81 @@ void	calculate_projection_params(t_fdf *fdf)
 	fdf->offset_y = WIN_HEIGHT / 2;
 }
 
-static void	draw_single_point(t_fdf *fdf, int x, int y)
-{
-	t_point			point3d;
-	t_screen_point	screen_point;
-
-	point3d = create_3d_point(x, y, fdf->map[y][x]);
-	screen_point = project_point(point3d, fdf);
-	if (screen_point.x >= 0 && screen_point.x < WIN_WIDTH &&
-		screen_point.y >= 0 && screen_point.y < WIN_HEIGHT)
-	{
-		my_mlx_pixel_put(fdf, screen_point.x, screen_point.y,
-			screen_point.color);
-	}
-}
-
-void	draw_map(t_fdf *fdf)
+static void	find_min_max_z(t_fdf *fdf, int *min_z, int *max_z)
 {
 	int	x;
 	int	y;
 
-	clear_image(fdf);
+	*min_z = fdf->map[0][0];
+	*max_z = fdf->map[0][0];
 	y = 0;
 	while (y < fdf->rows)
 	{
 		x = 0;
 		while (x < fdf->cols)
 		{
-			draw_single_point(fdf, x, y);
+			if (fdf->map[y][x] < *min_z)
+				*min_z = fdf->map[y][x];
+			if (fdf->map[y][x] > *max_z)
+				*max_z = fdf->map[y][x];
 			x++;
 		}
 		y++;
 	}
-	render_to_window(fdf);
+}
+
+static t_screen_point	get_screen_point(t_fdf *fdf, int x, int y,
+										int min_z, int max_z)
+{
+	t_point			point3d;
+	t_screen_point	screen_point;
+
+	point3d = create_3d_point(x, y, fdf->map[y][x]);
+	screen_point = project_point(point3d, fdf);
+	screen_point.color = get_color_by_height(fdf->map[y][x], min_z, max_z);
+	return (screen_point);
+}
+
+static void	draw_horizontal_lines(t_fdf *fdf, int min_z, int max_z)
+{
+	int				x;
+	int				y;
+	t_screen_point	current;
+	t_screen_point	next;
+
+	y = 0;
+	while (y < fdf->rows)
+	{
+		x = 0;
+		while (x < fdf->cols - 1)
+		{
+			current = get_screen_point(fdf, x, y, min_z, max_z);
+			next = get_screen_point(fdf, x + 1, y, min_z, max_z);
+			draw_line(fdf, current, next);
+			x++;
+		}
+		y++;
+	}
+}
+
+static void	draw_vertical_lines(t_fdf *fdf, int min_z, int max_z)
+{
+	int				x;
+	int				y;
+	t_screen_point	current;
+	t_screen_point	next;
+
+	x = 0;
+	while (x < fdf->cols)
+	{
+		y = 0;
+		while (y < fdf->rows - 1)
+		{
+			current = get_screen_point(fdf, x, y, min_z, max_z);
+			next = get_screen_point(fdf, x, y + 1, min_z, max_z);
+			draw_line(fdf, current, next);
+			y++;
+		}
+		x++;
+	}
 }

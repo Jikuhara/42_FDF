@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,32 +12,20 @@
 
 #include "fdf.h"
 
-/* プログラム終了処理 */
-int	close_program(t_fdf *fdf)
+int	init_image(t_fdf *fdf)
 {
-	cleanup_fdf(fdf);
-	exit(0);
+	fdf->img = mlx_new_image(fdf->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!fdf->img)
+	{
+		return (-1);
+	}
+	fdf->addr = mlx_get_data_addr(fdf->img, &fdf->bits_per_pixel, \
+&fdf->line_length, &fdf->endian);
+	if (!fdf->addr)
+	{
+		mlx_destroy_image(fdf->mlx, fdf->img);
+		fdf->img = NULL;
+		return (-1);
+	}
 	return (0);
-}
-
-/* キーイベント処理 */
-int	key_press(int keycode, t_fdf *fdf)
-{
-	if (keycode == ESC_KEY)
-		close_program(fdf);
-	return (0);
-}
-
-/* ×ボタンクリック処理 */
-int	close_window(t_fdf *fdf)
-{
-	close_program(fdf);
-	return (0);
-}
-
-/* イベントハンドラーの設定 */
-void	setup_events(t_fdf *fdf)
-{
-	mlx_key_hook(fdf->win, key_press, fdf);
-	mlx_hook(fdf->win, 17, 0, close_window, fdf);
 }

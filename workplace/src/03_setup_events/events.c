@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/21 20:45:22 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/07/01 15:10:29 by kei2003730       ###   ########.fr       */
+/*   Created: 2025/07/01 10:00:00 by kei2003730       #+#    #+#             */
+/*   Updated: 2025/07/01 10:00:00 by kei2003730       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	main(int argc, char *argv[])
+int	close_program(t_fdf *fdf)
 {
-	int		**map;
-	int		rows;
-	int		cols;
-	t_fdf	*fdf;
-
-	input_validation(argc, argv);
-	parse_map(argv[1], &map, &rows, &cols);
-	initialize_graphics(&fdf, map, rows, cols);
-	setup_events(fdf);
-	calculate_projection_params(fdf);
-	draw_map(fdf);
-	mlx_loop(fdf->mlx);
+	cleanup_fdf(fdf);
+	exit(0);
 	return (0);
+}
+
+int	key_press(int keycode, t_fdf *fdf)
+{
+	if (keycode == ESC_KEY)
+		close_program(fdf);
+	return (0);
+}
+
+int	close_window(t_fdf *fdf)
+{
+	close_program(fdf);
+	return (0);
+}
+
+void	setup_events(t_fdf *fdf)
+{
+	mlx_key_hook(fdf->win, key_press, fdf);
+	mlx_hook(fdf->win, 17, 0, close_window, fdf);
 }

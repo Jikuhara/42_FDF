@@ -6,5 +6,8 @@ maps.zip
 *.o
 *.out
 fdf
-COPILOT_PROMPTS.md
+# COPILOT_PROMPTS.md
 *.a
+# Markdown files except memo.md
+*.md
+!memo.md

@@ -6,7 +6,7 @@
 #    By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/07/01 13:47:19 by kei2003730       ###   ########.fr        #
+#    Updated: 2025/07/01 14:52:40 by kei2003730       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,9 @@ MAP_PARSE_A	:=	$(MAP_PARSE_DIR)/map_parse.a
 SRCS_MAND	:=	src/main.c \
 		src/input_validation/input_validation.c \
 		src/graphics/graphics.c \
+		src/graphics/draw.c \
 		src/graphics/events.c \
+		src/graphics/99_utils.c \
 		src/graphics/projection.c
 
 #object files
