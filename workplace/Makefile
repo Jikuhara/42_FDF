@@ -6,7 +6,7 @@
 #    By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/07/01 10:10:56 by kei2003730       ###   ########.fr        #
+#    Updated: 2025/07/01 10:23:13 by kei2003730       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,9 +64,9 @@ LIBMLX		:=	libmlx.a
 SRCS_MAND	:=	src/main.c \
 		src/input_validation/input_validation.c \
 		src/input_validation/map_parser.c \
-		src/get_next_line.c \
-		src/graphics.c \
-		src/events.c
+		src/input_validation/get_next_line.c \
+		src/graphics/graphics.c \
+		src/graphics/events.c
 
 #bonus sources
 

@@ -44,8 +44,8 @@ int	init_image(t_fdf *fdf)
 	fdf->img = mlx_new_image(fdf->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!fdf->img)
 		return (-1);
-	fdf->addr = mlx_get_data_addr(fdf->img, &fdf->bits_per_pixel,
-		&fdf->line_length, &fdf->endian);
+	fdf->addr = mlx_get_data_addr(fdf->img, &fdf->bits_per_pixel, \
+&fdf->line_length, &fdf->endian);
 	if (!fdf->addr)
 		return (-1);
 	return (0);
@@ -58,8 +58,9 @@ void	my_mlx_pixel_put(t_fdf *fdf, int x, int y, int color)
 
 	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
 	{
-		dst = fdf->addr + (y * fdf->line_length + x * (fdf->bits_per_pixel / 8));
-		*(unsigned int*)dst = color;
+		dst = fdf->addr + (y * fdf->line_length + x * \
+(fdf->bits_per_pixel / 8));
+		*(unsigned int *)dst = color;
 	}
 }
 

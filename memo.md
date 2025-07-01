@@ -245,16 +245,16 @@ githubのissueを使うのが良いのかなぁ。
 ## OUTPUT実装
 
 ### 1. Window準備
-- [ ] mlx_init()でminilibxの初期化を行う
-- [ ] mlx_new_window()でウィンドウを作成する
-- [ ] imageを使用した描画システムの実装
-  - [ ] mlx_new_image()でイメージ作成
-  - [ ] mlx_get_data_addr()でデータアドレス取得
-  - [ ] mlx_put_image_to_window()で画面に描画
-- [ ] loop待機の実装
-- [ ] ESCやマウス処理の実装（BONUS範囲）
-  - [ ] ESCキーでプログラム終了
-  - [ ] ×ボタンでプログラム終了
+- [x] mlx_init()でminilibxの初期化を行う
+- [x] mlx_new_window()でウィンドウを作成する
+- [x] imageを使用した描画システムの実装
+  - [x] mlx_new_image()でイメージ作成
+  - [x] mlx_get_data_addr()でデータアドレス取得
+  - [x] mlx_put_image_to_window()で画面に描画
+- [x] loop待機の実装
+- [x] ESCやマウス処理の実装（BONUS範囲）
+  - [x] ESCキーでプログラム終了
+  - [x] ×ボタンでプログラム終了
 
 ### 2. 座標変換
 - [ ] 視点に合わせて各点の座標を変換する
