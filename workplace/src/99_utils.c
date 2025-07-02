@@ -72,3 +72,18 @@ void	cleanup_fdf(t_fdf *fdf)
 		free(fdf);
 	}
 }
+
+void	free_map(int **map, int rows)
+{
+	int	i;
+
+	if (!map)
+		return ;
+	i = 0;
+	while (i < rows)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}

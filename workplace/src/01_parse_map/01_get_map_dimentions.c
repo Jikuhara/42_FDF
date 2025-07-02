@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   01_get_map_dimentions.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 11:16:21 by kei2003730        #+#    #+#             */
-/*   Updated: 2025/07/01 13:09:13 by kei2003730       ###   ########.fr       */
+/*   Updated: 2025/07/02 16:07:17 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parse.h"
+#include "fdf.h"
 
 static int	get_columns_size(char *line)
 {

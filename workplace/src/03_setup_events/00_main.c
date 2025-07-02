@@ -37,14 +37,14 @@ static void	zoom_out(t_fdf *fdf)
 	}
 }
 
-int	close_program(t_fdf *fdf)
+static int	close_program(t_fdf *fdf)
 {
 	cleanup_fdf(fdf);
 	exit(0);
 	return (0);
 }
 
-int	key_press(int keycode, t_fdf *fdf)
+static int	key_press(int keycode, t_fdf *fdf)
 {
 	if (keycode == ESC_KEY)
 		close_program(fdf);
@@ -55,13 +55,13 @@ int	key_press(int keycode, t_fdf *fdf)
 	return (0);
 }
 
-int	close_window(t_fdf *fdf)
+static int	close_window(t_fdf *fdf)
 {
 	close_program(fdf);
 	return (0);
 }
 
-int	mouse_hook(int button, int x, int y, t_fdf *fdf)
+static int	mouse_hook(int button, int x, int y, t_fdf *fdf)
 {
 	(void)x;
 	(void)y;

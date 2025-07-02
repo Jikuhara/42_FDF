@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+         #
+#    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/07/01 16:16:04 by kei2003730       ###   ########.fr        #
+#    Updated: 2025/07/02 16:08:12 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,8 @@ NAME		:=	fdf
 #─ compile config ────────────────────────────────────────────────────────────
 
 CC			:=	cc
-CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -Isrc/01_parse_map
-CCFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -Isrc/01_parse_map -lXext -lX11 -lm
+CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft
+CCFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -lXext -lX11 -lm
 # CFLAGS		:=	-Iincludes -Ilibft
 # CFLAGS		:=	-Wall -Wextra -Werror -Iincludes -Ilibft -fsanitize=address
 T_CFLAGS	:=	-Iincludes -Ilibft
@@ -56,8 +56,6 @@ OBJDIR		:=	obj
 LIBFT_DIR	:=	libft
 LIBFT_A		:=	$(LIBFT_DIR)/libft.a
 LIBMLX		:=	libmlx.a
-MAP_PARSE_DIR	:=	src/01_parse_map
-MAP_PARSE_A	:=	$(MAP_PARSE_DIR)/map_parse.a
 
 #─ sources & objects ─────────────────────────────────────────────────────────
 
@@ -66,6 +64,10 @@ MAP_PARSE_A	:=	$(MAP_PARSE_DIR)/map_parse.a
 SRCS_MAND	:=	src/main.c \
 		src/99_utils.c \
 		src/00_input_validation/00_main.c \
+		src/01_parse_map/00_main.c \
+		src/01_parse_map/01_get_map_dimentions.c \
+		src/01_parse_map/02_allocate_map_memory.c \
+		src/01_parse_map/03_fill_map_data.c \
 		src/02_initalize_graphics/00_main.c \
 		src/02_initalize_graphics/01_init_fdf.c \
 		src/02_initalize_graphics/02_init_image.c \
@@ -88,9 +90,9 @@ OBJS_MAND	:=	$(SRCS_MAND:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT_A) $(MAP_PARSE_A) $(OBJS_MAND)
+$(NAME): $(LIBFT_A) $(OBJS_MAND)
 	@echo "Compiled with $(GREEN)$(BOLD)$(CFLAGS)$(RESET)"
-	@$(CC) $(OBJS_MAND) -o $@ $(MAP_PARSE_A) $(LIBFT_A) $(LIBMLX) $(CCFLAGS)
+	@$(CC) $(OBJS_MAND) -o $@ $(LIBFT_A) $(LIBMLX) $(CCFLAGS)
 	@echo "$(YELLOW)$(BOLD)========================================="
 	@echo "    You can use My $(NAME)!!"
 	@echo "=========================================$(RESET)"
@@ -107,21 +109,14 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 $(LIBFT_A):
 	@$(MAKE) -C $(LIBFT_DIR)
 
-# map_parse
-
-$(MAP_PARSE_A): $(LIBFT_A)
-	@$(MAKE) -C $(MAP_PARSE_DIR)
-
 # clean targets
 
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
-	@$(MAKE) -C $(MAP_PARSE_DIR) clean
 	@rm -rf $(OBJDIR)
 
 fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@$(MAKE) -C $(MAP_PARSE_DIR) fclean
 	@rm -f $(NAME)
 
 re: fclean all

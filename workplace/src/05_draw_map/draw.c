@@ -44,15 +44,17 @@ int	interpolate_color(int color1, int color2, float ratio)
 	int	b1;
 	int	r2;
 	int	g2;
+	int b2;
 
 	r1 = (color1 >> 16) & 0xFF;
 	g1 = (color1 >> 8) & 0xFF;
 	b1 = color1 & 0xFF;
 	r2 = (color2 >> 16) & 0xFF;
 	g2 = (color2 >> 8) & 0xFF;
+	b2 = color2 & 0xFF;
 	return (((int)(r1 + (r2 - r1) * ratio) << 16) |
 			((int)(g1 + (g2 - g1) * ratio) << 8) |
-			(int)(b1 + ((color2 & 0xFF) - b1) * ratio));
+			(int)(b1 + (b2 - b1) * ratio));
 }
 
 void	draw_line_pixels(t_fdf *fdf, t_screen_point p1, t_screen_point p2,

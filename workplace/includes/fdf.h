@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 20:45:40 by kjikuhar          #+#    #+#             */
-/*   Updated: 2025/07/01 16:26:36 by kei2003730       ###   ########.fr       */
+/*   Updated: 2025/07/02 16:06:10 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,11 @@ typedef struct s_fdf
 	int			offset_y;
 }				t_fdf;
 
-/* input_validation.c */
+/* 00_input_validation */
 void			input_validation(int argc, char *argv[]);
 
-/* map_parser.c */
+/* 01_map_parse */
 void			parse_map(char *filename, int ***map, int *rows, int *cols);
-void			free_map(int **map, int rows);
 
 /* get_map_dimentions.c */
 void			get_map_dimentions(char *filename, int *rows, int *cols);
@@ -99,10 +98,6 @@ void			draw_line_pixels(t_fdf *fdf, t_screen_point p1,
 				t_screen_point p2, float x_inc, float y_inc);
 
 /* events.c */
-int				close_program(t_fdf *fdf);
-int				key_press(int keycode, t_fdf *fdf);
-int				close_window(t_fdf *fdf);
-int				mouse_hook(int button, int x, int y, t_fdf *fdf);
 void			setup_events(t_fdf *fdf);
 
 /* projection.c */
@@ -114,5 +109,7 @@ void			find_min_max_z(t_fdf *fdf, int *min_z, int *max_z);
 t_screen_point	get_screen_point(t_fdf *fdf, int x, int y, int min_z, int max_z);
 void			draw_horizontal_lines(t_fdf *fdf, int min_z, int max_z);
 void			draw_vertical_lines(t_fdf *fdf, int min_z, int max_z);
+
+void			free_map(int **map, int rows);
 
 #endif

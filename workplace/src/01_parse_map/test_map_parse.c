@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   test_map_parse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kei2003730 <kei2003730@student.42.fr>      +#+  +:+       +#+        */
+/*   By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 13:20:00 by kei2003730        #+#    #+#             */
-/*   Updated: 2025/07/01 15:59:50 by kei2003730       ###   ########.fr       */
+/*   Updated: 2025/07/02 15:46:07 by kjikuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "map_parse.h"
+// #include "fdf.h"
 // #include <stdio.h>
 // #include <string.h>
 // #include <stdlib.h>
