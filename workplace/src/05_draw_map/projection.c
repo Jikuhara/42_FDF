@@ -35,15 +35,15 @@ void	find_min_max_z(t_fdf *fdf, int *min_z, int *max_z)
 	}
 }
 
-t_screen_point	get_screen_point(t_fdf *fdf, int x, int y,
-										int min_z, int max_z)
+t_screen_point	get_screen_point(t_fdf *fdf, int x, int y, t_z_range z_range)
 {
 	t_point			point3d;
 	t_screen_point	screen_point;
 
 	point3d = create_3d_point(x, y, fdf->map[y][x]);
 	screen_point = project_point(point3d, fdf);
-	screen_point.color = get_color_by_height(fdf->map[y][x], min_z, max_z);
+	screen_point.color = get_color_by_height(fdf->map[y][x], z_range.min_z,
+			z_range.max_z);
 	return (screen_point);
 }
 
@@ -53,15 +53,18 @@ void	draw_horizontal_lines(t_fdf *fdf, int min_z, int max_z)
 	int				y;
 	t_screen_point	current;
 	t_screen_point	next;
+	t_z_range		z_range;
 
+	z_range.min_z = min_z;
+	z_range.max_z = max_z;
 	y = 0;
 	while (y < fdf->rows)
 	{
 		x = 0;
 		while (x < fdf->cols - 1)
 		{
-			current = get_screen_point(fdf, x, y, min_z, max_z);
-			next = get_screen_point(fdf, x + 1, y, min_z, max_z);
+			current = get_screen_point(fdf, x, y, z_range);
+			next = get_screen_point(fdf, x + 1, y, z_range);
 			draw_line(fdf, current, next);
 			x++;
 		}
@@ -75,15 +78,18 @@ void	draw_vertical_lines(t_fdf *fdf, int min_z, int max_z)
 	int				y;
 	t_screen_point	current;
 	t_screen_point	next;
+	t_z_range		z_range;
 
+	z_range.min_z = min_z;
+	z_range.max_z = max_z;
 	x = 0;
 	while (x < fdf->cols)
 	{
 		y = 0;
 		while (y < fdf->rows - 1)
 		{
-			current = get_screen_point(fdf, x, y, min_z, max_z);
-			next = get_screen_point(fdf, x, y + 1, min_z, max_z);
+			current = get_screen_point(fdf, x, y, z_range);
+			next = get_screen_point(fdf, x, y + 1, z_range);
 			draw_line(fdf, current, next);
 			y++;
 		}

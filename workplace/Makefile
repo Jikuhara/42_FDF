@@ -6,7 +6,7 @@
 #    By: kjikuhar <kjikuhar@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 14:37:47 by kjikuhar          #+#    #+#              #
-#    Updated: 2025/07/02 16:08:12 by kjikuhar         ###   ########.fr        #
+#    Updated: 2025/07/02 16:32:11 by kjikuhar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,8 @@ SRCS_MAND	:=	src/main.c \
 		src/02_initalize_graphics/01_init_fdf.c \
 		src/02_initalize_graphics/02_init_image.c \
 		src/03_setup_events/00_main.c \
+		src/03_setup_events/01_key_hook.c \
+		src/03_setup_events/02_mouse_hook.c \
 		src/04_calculate_projection_params/00_main.c \
 		src/05_draw_map/00_main.c \
 		src/05_draw_map/draw.c \

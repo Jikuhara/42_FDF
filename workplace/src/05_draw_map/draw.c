@@ -39,58 +39,51 @@ int	get_color_by_height(int z, int min_z, int max_z)
 
 int	interpolate_color(int color1, int color2, float ratio)
 {
-	int	r1;
-	int	g1;
-	int	b1;
-	int	r2;
-	int	g2;
-	int b2;
+	int	r;
+	int	g;
+	int	b;
 
-	r1 = (color1 >> 16) & 0xFF;
-	g1 = (color1 >> 8) & 0xFF;
-	b1 = color1 & 0xFF;
-	r2 = (color2 >> 16) & 0xFF;
-	g2 = (color2 >> 8) & 0xFF;
-	b2 = color2 & 0xFF;
-	return (((int)(r1 + (r2 - r1) * ratio) << 16) |
-			((int)(g1 + (g2 - g1) * ratio) << 8) |
-			(int)(b1 + (b2 - b1) * ratio));
+	r = (color1 >> 16 & 0xFF) + ((color2 >> 16 & 0xFF) - (color1 >> 16 & 0xFF))
+		* ratio;
+	g = (color1 >> 8 & 0xFF) + ((color2 >> 8 & 0xFF) - (color1 >> 8 & 0xFF))
+		* ratio;
+	b = (color1 & 0xFF) + ((color2 & 0xFF) - (color1 & 0xFF)) * ratio;
+	return ((r << 16) | (g << 8) | b);
 }
 
 void	draw_line_pixels(t_fdf *fdf, t_screen_point p1, t_screen_point p2,
-					float x_inc, float y_inc)
+		int steps)
 {
 	float	x;
 	float	y;
+	float	x_inc;
+	float	y_inc;
 	int		i;
-	int		steps;
 
-	ft_max_int(ft_abs_int(p2.x - p1.x), ft_abs_int(p2.y - p1.y), &steps);
+	x_inc = (float)(p2.x - p1.x) / steps;
+	y_inc = (float)(p2.y - p1.y) / steps;
 	x = p1.x;
 	y = p1.y;
 	i = 0;
 	while (i <= steps)
 	{
-		my_mlx_pixel_put(fdf, (int)x, (int)y,
-			interpolate_color(p1.color, p2.color, (float)i / steps));
+		my_mlx_pixel_put(fdf, (int)x, (int)y, interpolate_color(p1.color,
+				p2.color, (float)i / steps));
 		x += x_inc;
 		y += y_inc;
 		i++;
 	}
 }
 
+// 呼び出し側
 void	draw_line(t_fdf *fdf, t_screen_point p1, t_screen_point p2)
 {
-	int		dx;
-	int		dy;
-	int		steps;
-	float	x_inc;
-	float	y_inc;
+	int	dx;
+	int	dy;
+	int	steps;
 
 	dx = p2.x - p1.x;
 	dy = p2.y - p1.y;
 	ft_max_int(ft_abs_int(dx), ft_abs_int(dy), &steps);
-	x_inc = (float)dx / steps;
-	y_inc = (float)dy / steps;
-	draw_line_pixels(fdf, p1, p2, x_inc, y_inc);
+	draw_line_pixels(fdf, p1, p2, steps);
 }

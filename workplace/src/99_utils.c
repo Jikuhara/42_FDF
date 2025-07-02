@@ -18,28 +18,18 @@ void	my_mlx_pixel_put(t_fdf *fdf, int x, int y, int color)
 
 	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
 	{
-		dst = fdf->addr + (y * fdf->line_length + x * \
-(fdf->bits_per_pixel / 8));
+		dst = fdf->addr + (y * fdf->line_length + x * (fdf->bits_per_pixel
+					/ 8));
 		*(unsigned int *)dst = color;
 	}
 }
 
 void	clear_image(t_fdf *fdf)
 {
-	int	x;
-	int	y;
+	int				total_bytes;
 
-	y = 0;
-	while (y < WIN_HEIGHT)
-	{
-		x = 0;
-		while (x < WIN_WIDTH)
-		{
-			my_mlx_pixel_put(fdf, x, y, COLOR_BLACK);
-			x++;
-		}
-		y++;
-	}
+	total_bytes = WIN_HEIGHT * fdf->line_length;
+	ft_memset(fdf->addr, 0, total_bytes);
 }
 
 t_point	create_3d_point(int x, int y, int z)
@@ -68,6 +58,10 @@ void	cleanup_fdf(t_fdf *fdf)
 		{
 			mlx_destroy_display(fdf->mlx);
 			free(fdf->mlx);
+		}
+		if (fdf->map)
+		{
+			free_map(fdf->map, fdf->rows);
 		}
 		free(fdf);
 	}

@@ -19,8 +19,8 @@ int	init_image(t_fdf *fdf)
 	{
 		return (-1);
 	}
-	fdf->addr = mlx_get_data_addr(fdf->img, &fdf->bits_per_pixel, \
-&fdf->line_length, &fdf->endian);
+	fdf->addr = mlx_get_data_addr(fdf->img, &fdf->bits_per_pixel,
+			&fdf->line_length, &fdf->endian);
 	if (!fdf->addr)
 	{
 		mlx_destroy_image(fdf->mlx, fdf->img);
